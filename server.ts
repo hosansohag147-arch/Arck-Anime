@@ -22,17 +22,12 @@ async function startServer() {
       appType: "spa",
     });
     app.use(vite.middlewares);
+  // server.ts এর এই অংশটুকু পরিবর্তন করুন
   } else {
-    const distPath = path.join(process.cwd(), "dist");
+    // __dirname এর পরিবর্তে process.cwd() ব্যবহার করা হচ্ছে যা রেন্ডারের জন্য নিরাপদ
+    const distPath = path.resolve(process.cwd(), "dist"); 
     app.use(express.static(distPath));
     app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+      res.sendFile(path.resolve(distPath, "index.html"));
     });
   }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
-}
-
-startServer();
