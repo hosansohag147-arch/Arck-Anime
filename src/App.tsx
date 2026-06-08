@@ -217,14 +217,24 @@ export default function App() {
         </div>
 
         {/* Dynamic Video Player Section */}
-        <div className="w-full aspect-video bg-black rounded-3xl overflow-hidden shadow-2xl mb-8 relative border border-white/10">
-          <iframe 
-            src={https://www.youtube.com/embed/dQw4w9WgXcQ} 
-            className="w-full h-full border-0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen 
-            title="Anime Player"
-          />
+        <div className="w-full aspect-video bg-black rounded-3xl overflow-hidden ring-1 ring-white/10 shadow-[0_20px_50px_rgba(229,9,20,0.15)] flex items-center justify-center mb-8 relative border border-white/5">
+           <div className="absolute inset-0 z-0 opacity-20">
+             <img src={selectedAnime.poster} alt="blur bg" className="w-full h-full object-cover blur-2xl block" />
+           </div>
+           
+           <div className="flex flex-col items-center z-10 p-6 text-center animate-in zoom-in-95 duration-500">
+              <div className="w-20 h-20 bg-[#E50914] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(229,9,20,0.6)] mb-6 animate-pulse">
+                 <Play className="w-10 h-10 text-white fill-white ml-2" />
+              </div>
+              <h3 className="text-2xl md:text-3xl font-black text-white mb-2 tracking-tight drop-shadow-md">Player Placeholder</h3>
+              <p className="text-neutral-400 font-medium max-w-md">
+                 Replace this block with your local iframe or video source for Episode {currentEpisode}. 
+              </p>
+              <div className="mt-6 border border-[#E50914]/30 bg-[#E50914]/10 rounded-lg px-4 py-2 flex items-center gap-2">
+                 <MonitorPlay className="w-5 h-5 text-[#E50914]" />
+                 <span className="text-[#E50914] font-bold text-sm tracking-wide">Ready for Integration</span>
+              </div>
+           </div>
         </div>
 
         {/* Dubbing Option Bar */}
@@ -259,34 +269,69 @@ export default function App() {
                  <span className="px-4 py-1.5 bg-purple-600 text-white text-sm font-black tracking-wider uppercase rounded-lg shadow-[0_0_15px_rgba(147,51,234,0.4)] flex items-center gap-2">
                    <Play className="w-3.5 h-3.5 fill-current" /> EPISODE {currentEpisode}
                  </span>
+                 <span className="px-4 py-1.5 bg-emerald-500/10 text-emerald-400 text-sm font-bold uppercase rounded-lg border border-emerald-500/20 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-emerald-400 rounded-full shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-pulse"></div> Local Stream: {currentDub}
+                 </span>
               </div>
               <p className="text-neutral-400 max-w-3xl text-sm md:text-base leading-relaxed">
                 {selectedAnime.description}
               </p>
            </div>
-           
+
+           {/* Quick Navigation Controls */}
            <div className="flex items-center gap-3 shrink-0 w-full lg:w-auto mt-2 h-14">
-              <button onClick={handlePrev} disabled={currentEpisode === 1} className="h-full flex-1 lg:flex-none flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 rounded-2xl font-black tracking-wide transition-all duration-300 shadow-md text-sm md:text-base">
+              <button 
+                onClick={handlePrev}
+                disabled={currentEpisode === 1}
+                className="h-full flex-1 lg:flex-none flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-700 hover:border-neutral-500 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 rounded-2xl font-black tracking-wide transition-all duration-300 shadow-md text-sm md:text-base"
+              >
                 <ChevronLeft className="w-5 h-5" /> PREV 
               </button>
-              <button onClick={handleNext} disabled={currentEpisode === selectedAnime.totalEpisodes} className="h-full flex-1 lg:flex-none flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 rounded-2xl font-black tracking-wide shadow-[0_0_20px_rgba(147,51,234,0.3)] transition-all duration-300 text-sm md:text-base">
+              <button 
+                onClick={handleNext}
+                disabled={currentEpisode === selectedAnime.totalEpisodes}
+                className="h-full flex-1 lg:flex-none flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:cursor-not-allowed text-white px-8 rounded-2xl font-black tracking-wide shadow-[0_0_20px_rgba(147,51,234,0.3)] hover:shadow-[0_0_30px_rgba(147,51,234,0.5)] transition-all duration-300 text-sm md:text-base"
+              >
                 NEXT <ChevronRight className="w-5 h-5" />
               </button>
            </div>
         </div>
 
-        {/* Episode Grid */}
+        {/* Episode Grid Controller */}
         <div>
            <div className="flex items-center gap-4 mb-8 border-b border-white/5 pb-4">
               <ListVideo className="w-6 h-6 text-purple-500" />
               <h2 className="text-2xl font-black text-white tracking-tight">Select Episode</h2>
            </div>
+           
            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-3 md:gap-4">
               {selectedAnime.episodes.map((ep: any) => (
-                <button key={ep.id} onClick={() => setCurrentEpisode(ep.id)} className={`group relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-center font-black transition-all duration-300 border-2 ${currentEpisode === ep.id ? 'border-purple-500 text-white bg-purple-600/20 shadow-[0_0_20px_rgba(147,51,234,0.3)]' : 'border-neutral-800 text-neutral-500 bg-neutral-900 hover:border-neutral-600 hover:text-white hover:bg-neutral-800'}`}>
-                   {currentEpisode === ep.id && <div className="absolute inset-0 bg-gradient-to-t from-purple-600/40 to-transparent"></div>}
-                   <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 opacity-40">EP</span>
-                   <span className="text-xl sm:text-3xl z-10">{ep.id}</span>
+                <button
+                  key={ep.id}
+                  onClick={() => setCurrentEpisode(ep.id)}
+                  className={`
+                    group relative aspect-square rounded-2xl overflow-hidden flex flex-col items-center justify-center font-black transition-all duration-300 border-2 
+                    ${currentEpisode === ep.id 
+                       ? 'border-purple-500 text-white bg-purple-600/20 shadow-[0_0_20px_rgba(147,51,234,0.3)]' 
+                       : 'border-neutral-800 text-neutral-500 bg-neutral-900 hover:border-neutral-600 hover:text-white hover:bg-neutral-800'
+                    }
+                  `}
+                >
+                   {currentEpisode === ep.id && (
+                     <div className="absolute inset-0 bg-gradient-to-t from-purple-600/40 to-transparent"></div>
+                   )}
+                   
+                   <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest mb-0.5 ${currentEpisode === ep.id ? 'text-purple-300' : 'opacity-40 group-hover:opacity-100 transition-opacity'}`}>
+                     EP
+                   </span>
+                   <span className={`text-xl sm:text-3xl z-10 font-bold ${currentEpisode === ep.id ? 'text-white' : ''}`}>
+                     {ep.id}
+                   </span>
+                   
+                   {/* Active Indicator Line */}
+                   {currentEpisode === ep.id && (
+                     <div className="absolute bottom-0 left-0 w-full h-1.5 bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,1)]"></div>
+                   )}
                 </button>
               ))}
            </div>
@@ -294,6 +339,7 @@ export default function App() {
       </main>
     );
   };
+
   return (
     <div className="min-h-screen bg-black text-neutral-50 font-sans selection:bg-[#E50914]/30 w-full overflow-x-hidden">
       
@@ -341,4 +387,4 @@ export default function App() {
 
     </div>
   );
-}
+        }
