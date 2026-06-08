@@ -3,7 +3,22 @@ import { Play, Search, Bell, ListVideo, MonitorPlay, ArrowLeft } from 'lucide-re
 
 const DUB_OPTIONS = ["HINDI DUB", "ENGLISH DUB", "ENGLISH SUB", "JAPANESE SUB"];
 
-const ANIMES = [
+interface Episode {
+  id: number;
+  targetUrl: string;
+}
+
+interface Anime {
+  id: string;
+  title: string;
+  description: string;
+  poster: string;
+  epBadge: string;
+  totalEpisodes: number;
+  episodes: Episode[];
+}
+
+const ANIMES: Anime[] = [
   {
     id: "anime-1",
     title: "Demon Slayer: Kimetsu no Yaiba",
@@ -11,7 +26,9 @@ const ANIMES = [
     poster: "[https://images.unsplash.com/photo-1580477667995-15608321123c?auto=format&fit=crop&q=80&w=800](https://images.unsplash.com/photo-1580477667995-15608321123c?auto=format&fit=crop&q=80&w=800)",
     epBadge: "EP: 26",
     totalEpisodes: 26,
-    episodes: Array.from({ length: 26 }, (_, i) => ({ id: i + 1, targetUrl: `[https://toonanime.org/watch/demon-slayer-kimetsu-no-yaiba-episode-${i](https://toonanime.org/watch/demon-slayer-kimetsu-no-yaiba-episode-${i) + 1}` }))
+    episodes: Array.from({ length: 26 }, (_, i) => {
+      return { id: i + 1, targetUrl: `[https://toonanime.org/watch/demon-slayer-kimetsu-no-yaiba-episode-${i](https://toonanime.org/watch/demon-slayer-kimetsu-no-yaiba-episode-${i) + 1}` };
+    })
   },
   {
     id: "anime-2",
@@ -20,7 +37,9 @@ const ANIMES = [
     poster: "[https://images.unsplash.com/photo-1610147323479-a7fb11ffd5dd?auto=format&fit=crop&q=80&w=800](https://images.unsplash.com/photo-1610147323479-a7fb11ffd5dd?auto=format&fit=crop&q=80&w=800)",
     epBadge: "Season 2",
     totalEpisodes: 24,
-    episodes: Array.from({ length: 24 }, (_, i) => ({ id: i + 1, targetUrl: `[https://toonanime.org/watch/jujutsu-kaisen-episode-${i](https://toonanime.org/watch/jujutsu-kaisen-episode-${i) + 1}` }))
+    episodes: Array.from({ length: 24 }, (_, i) => {
+      return { id: i + 1, targetUrl: `[https://toonanime.org/watch/jujutsu-kaisen-episode-${i](https://toonanime.org/watch/jujutsu-kaisen-episode-${i) + 1}` };
+    })
   },
   {
     id: "anime-3",
@@ -29,7 +48,9 @@ const ANIMES = [
     poster: "[https://images.unsplash.com/photo-1621416894554-18bb2a3fc42b?auto=format&fit=crop&q=80&w=800](https://images.unsplash.com/photo-1621416894554-18bb2a3fc42b?auto=format&fit=crop&q=80&w=800)",
     epBadge: "EP: 12",
     totalEpisodes: 12,
-    episodes: Array.from({ length: 12 }, (_, i) => ({ id: i + 1, targetUrl: `[https://toonanime.org/watch/solo-leveling-episode-${i](https://toonanime.org/watch/solo-leveling-episode-${i) + 1}` }))
+    episodes: Array.from({ length: 12 }, (_, i) => {
+      return { id: i + 1, targetUrl: `[https://toonanime.org/watch/solo-leveling-episode-${i](https://toonanime.org/watch/solo-leveling-episode-${i) + 1}` };
+    })
   },
   {
     id: "anime-4",
@@ -38,7 +59,9 @@ const ANIMES = [
     poster: "[https://images.unsplash.com/photo-1541562232579-512a21360020?auto=format&fit=crop&q=80&w=800](https://images.unsplash.com/photo-1541562232579-512a21360020?auto=format&fit=crop&q=80&w=800)",
     epBadge: "Completed",
     totalEpisodes: 87,
-    episodes: Array.from({ length: 87 }, (_, i) => ({ id: i + 1, targetUrl: `[https://toonanime.org/watch/attack-on-titan-episode-${i](https://toonanime.org/watch/attack-on-titan-episode-${i) + 1}` }))
+    episodes: Array.from({ length: 87 }, (_, i) => {
+      return { id: i + 1, targetUrl: `[https://toonanime.org/watch/attack-on-titan-episode-${i](https://toonanime.org/watch/attack-on-titan-episode-${i) + 1}` };
+    })
   },
   {
     id: "anime-5",
@@ -47,17 +70,19 @@ const ANIMES = [
     poster: "[https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?auto=format&fit=crop&q=80&w=800](https://images.unsplash.com/photo-1605806616949-1e87b487cb2a?auto=format&fit=crop&q=80&w=800)",
     epBadge: "EP: 12",
     totalEpisodes: 12,
-    episodes: Array.from({ length: 12 }, (_, i) => ({ id: i + 1, targetUrl: `[https://toonanime.org/watch/chainsaw-man-episode-${i](https://toonanime.org/watch/chainsaw-man-episode-${i) + 1}` }))
+    episodes: Array.from({ length: 12 }, (_, i) => {
+      return { id: i + 1, targetUrl: `[https://toonanime.org/watch/chainsaw-man-episode-${i](https://toonanime.org/watch/chainsaw-man-episode-${i) + 1}` };
+    })
   }
 ];
 
 export default function App() {
-  const [activePage, setActivePage] = useState('home');
-  const [selectedAnime, setSelectedAnime] = useState(null);
-  const [currentEpisode, setCurrentEpisode] = useState(1);
-  const [currentDub, setCurrentDub] = useState(DUB_OPTIONS[0]);
+  const [activePage, setActivePage] = useState<'home' | 'player'>('home');
+  const [selectedAnime, setSelectedAnime] = useState<Anime | null>(null);
+  const [currentEpisode, setCurrentEpisode] = useState<number>(1);
+  const [currentDub, setCurrentDub] = useState<string>(DUB_OPTIONS[0]);
 
-  const handleAnimeClick = (anime) => {
+  const handleAnimeClick = (anime: Anime) => {
     setSelectedAnime(anime);
     setCurrentEpisode(1);
     setActivePage('player');
@@ -167,4 +192,4 @@ export default function App() {
       )}
     </div>
   );
-    }
+        }
