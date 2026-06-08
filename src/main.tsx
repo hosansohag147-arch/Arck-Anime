@@ -8,3 +8,4 @@ createRoot(container).render(
     <App />
   </React.StrictMode>
 );
+import './index.css';
