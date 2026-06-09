@@ -451,7 +451,7 @@ export default function App() {
      top: '-300x',
      left: '0',
      width: '100%',
-     height: 'calc(100% + 750px)',
+     height: 'calc(100% + 850px)',
      pointerEvents: 'auto'
    }}
                  allowFullScreen
