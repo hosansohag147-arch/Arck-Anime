@@ -481,7 +481,7 @@ export default function App() {
                    className="border-none animate-in fade-in duration-700"
                    style={{
                      position: 'absolute',
-                     top: '-120%',
+                     top: '-110%',
                      left: '50%',
                      width: '100%',
                      height: '210%',
