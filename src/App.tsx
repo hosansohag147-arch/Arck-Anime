@@ -442,23 +442,29 @@ export default function App() {
                 } as any}
               />
            ) : iframeUrl ? (
-               <iframe 
-   id="toonstream-iframe-player"
-   src={iframeUrl}
-   className="w-full border-none bg-black animate-in fade-in duration-500"
-   style={{
-     position: 'absolute',
-     top: '-280pxpx',
-     left: '0',
-     width: '100%',
-     height: 'calc(100% + 560px)',
-     pointerEvents: 'auto'
-   }}
-                 allowFullScreen
-                 sandbox={sandboxLevel === 'strict' ? "allow-scripts allow-same-origin allow-presentation" : "allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"}
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                 title={`${currentSelectedData.title} Video Player`}
-              ></iframe>
+               ) : iframeUrl ? (
+  <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', background: '#000' }}>
+    <iframe 
+      id="toonstream-iframe-player"
+      src={iframeUrl}
+      className="border-none animate-in fade-in duration-500"
+      style={{
+        position: 'absolute',
+        top: '-290px',
+        left: '0',
+        width: '100%',
+        height: 'calc(100% + 580px)',
+        pointerEvents: 'auto',
+        background: '#000',
+      }}
+      allowFullScreen
+      sandbox={sandboxLevel === 'strict' 
+        ? "allow-scripts allow-same-origin allow-presentation" 
+        : "allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      title={`${currentSelectedData.title} Video Player`}
+    />
+  </div>
            ) : (
               <div className="flex flex-col items-center z-10 text-neutral-600">
                   <MonitorPlay className="w-12 h-12 mb-4" />
