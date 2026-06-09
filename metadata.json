@@ -1,0 +1,6 @@
+{
+  "name": "Anime Streaming Website",
+  "description": "A premium Netflix-style anime streaming website with advanced player integration, direct Gogoanime and Toonstream episode streams, CORS bypass bypass, and automatic posters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
