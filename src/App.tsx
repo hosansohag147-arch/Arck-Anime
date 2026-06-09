@@ -448,7 +448,7 @@ export default function App() {
    className="w-full border-none bg-black animate-in fade-in duration-500"
    style={{
      position: 'absolute',
-     top: '-550px',
+     top: '-300px',
      left: '0',
      width: '100%',
      height: 'calc(100% + 750px)',
