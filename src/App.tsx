@@ -240,7 +240,7 @@ export default function App() {
          console.error("Background auto-bot resolution exception", err);
          const safeSlug = activeSlug.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
          const suffix = currentDub === "DUB" ? "-dub" : "";
-         setIframeUrl(`https://${activeDomain}/embed/${safeSlug}${suffix}-episode-${currentEpisode}`);
+         setIframeUrl(`https://${activeDomain}/episode/${safeSlug}-1x${currentEpisode}/`);
          setPlayerMode('iframe');
        } finally {
          setIsFetchingStream(false);
