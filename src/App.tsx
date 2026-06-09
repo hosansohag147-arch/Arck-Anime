@@ -484,7 +484,7 @@ export default function App() {
                      top: '-90%',
                      left: '50%',
                      width: '100%',
-                     height: '230%',
+                     height: '300%',
                      transform: 'translateX(-50%)',
                      transformOrigin: 'top center',
                      pointerEvents: 'none',
