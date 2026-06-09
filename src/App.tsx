@@ -448,10 +448,10 @@ export default function App() {
    className="w-full border-none bg-black animate-in fade-in duration-500"
    style={{
      position: 'absolute',
-     top: '-300x',
+     top: '-340px',
      left: '0',
      width: '100%',
-     height: 'calc(100% + 300px)',
+     height: 'calc(100% + 670px)',
      pointerEvents: 'auto'
    }}
                  allowFullScreen
