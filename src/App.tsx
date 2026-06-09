@@ -449,10 +449,10 @@ export default function App() {
                    className="border-none animate-in fade-in duration-500"
                    style={{
                      position: 'absolute',
-                     top: '-290px',
+                     top: '-420px',
                      left: '0',
                      width: '100%',
-                     height: 'calc(100% + 580px)',
+                     height: 'calc(100% + 840px)',
                      pointerEvents: 'auto',
                      background: '#000',
                    }}
