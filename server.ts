@@ -64,8 +64,7 @@ async function startServer() {
 
     // Lock active domain strictly to toonstream.vip as requested
     const activeDomain = "toonstream.vip";
-    const resolvedUrl = `https://${activeDomain}/embed/${safeSlug}${suffix}-episode-${currentEpisode}`;
-
+    const resolvedUrl = `https://${activeDomain}/episode/${safeSlug}-1x${currentEpisode}/`;
     // List of reliable streaming endpoints (locked exclusively to toonstream.vip)
     const mirrors = [
       resolvedUrl
