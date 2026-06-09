@@ -442,10 +442,18 @@ export default function App() {
                 } as any}
               />
            ) : iframeUrl ? (
-              <iframe 
-                 id="toonstream-iframe-player"
-                 src={iframeUrl}
-                 className="w-full h-full border-none absolute inset-0 bg-black animate-in fade-in duration-500"
+               <iframe 
+   id="toonstream-iframe-player"
+   src={iframeUrl}
+   className="w-full border-none bg-black animate-in fade-in duration-500"
+   style={{
+     position: 'absolute',
+     top: '-320px',
+     left: '0',
+     width: '100%',
+     height: 'calc(100% + 650px)',
+     pointerEvents: 'auto'
+   }}
                  allowFullScreen
                  sandbox={sandboxLevel === 'strict' ? "allow-scripts allow-same-origin allow-presentation" : "allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"}
                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
