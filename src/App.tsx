@@ -442,7 +442,6 @@ export default function App() {
                 } as any}
               />
            ) : iframeUrl ? (
-               ) : iframeUrl ? (
   <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', background: '#000' }}>
     <iframe 
       id="toonstream-iframe-player"
@@ -458,7 +457,11 @@ export default function App() {
         background: '#000',
       }}
       allowFullScreen
-      sandbox={sandboxLevel === 'strict' 
+      sandbox={sandboxLevel === 'strict' ? "allow-scripts allow-same-origin allow-presentation" : "allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      title={`${currentSelectedData.title} Video Player`}
+    />
+  </div>
         ? "allow-scripts allow-same-origin allow-presentation" 
         : "allow-scripts allow-same-origin allow-presentation allow-forms allow-popups allow-popups-to-escape-sandbox"}
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
