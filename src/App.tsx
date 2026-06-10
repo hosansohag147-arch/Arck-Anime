@@ -487,8 +487,6 @@ export default function App() {
                      height: '240%',
                      transform: 'translateX(-50%)',
                      transformOrigin: 'top center',
-                     pointerEvents }
-                     background: '#000',
                    }}
                    allowFullScreen
                    sandbox={sandboxLevel === 'strict'
