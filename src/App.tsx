@@ -487,7 +487,7 @@ export default function App() {
                      height: '240%',
                      transform: 'translateX(-50%)',
                      transformOrigin: 'top center',
-                     pointerEvents:
+                     pointerEvents
                      background: '#000',
                    }}
                    allowFullScreen
