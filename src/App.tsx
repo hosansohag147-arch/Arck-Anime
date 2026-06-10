@@ -481,10 +481,10 @@ export default function App() {
                    className="border-none animate-in fade-in duration-700"
                    style={{
                      position: 'absolute',
-                     top: '-75%',
+                     top: '-80%',
                      left: '50%',
                      width: '100%',
-                     height: '240%',
+                     height: '300%',
                      transform: 'translateX(-50%)',
                      transformOrigin: 'top center',
                      pointerEvents: 'none',
